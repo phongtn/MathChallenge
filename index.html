@@ -60,16 +60,6 @@
 		startTimer(display);
 	}
 
-	function playCorrectSound() {
-		// Play sound for correct answer
-		document.getElementById('correctSound').play();
-	}
-
-	function playWrongSound() {
-		// Play sound for wrong answer
-		document.getElementById('wrongSound').play();
-	}
-
 	function checkAnswer(choice) {
 		// Get the text content of the button clicked
 		const selectedOption = document.getElementsByTagName('button')[choice - 1].textContent;
@@ -80,10 +70,10 @@
 		if (selectedNumber === correctAnswer) {
 			score += 1; // Increment score by 1 for correct answer
 			generateProblem();
-			playCorrectSound();
+			document.getElementById('correctSound').play();
 		} else {
 			score = Math.max(0, score - 1); // Decrement score by 1 for incorrect answer (minimum score is 0)
-			playWrongSound();
+			document.getElementById('wrongSound').play();
 		}
 	}
 

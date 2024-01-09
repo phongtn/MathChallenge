@@ -696,6 +696,10 @@ video {
   display: inline-flex;
 }
 
+.table {
+  display: table;
+}
+
 .h-screen {
   height: 100vh;
 }

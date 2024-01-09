@@ -5,6 +5,10 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Simple math game for Kids to learn multiplication table">
+	<meta name="keywords" content="Math game, math challenge">
+	<meta name="author" content="PhongTn">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="src/output.css" rel="stylesheet">
 </head>
 <!-- Google tag (gtag.js) -->
@@ -30,7 +34,7 @@
 			display.textContent = timeLeft;
 			document.getElementById('score').textContent = `Score: ${score}`; // Display score
 			if (--timeLeft < 0) {
-				updateScore(false);
+				score = Math.max(0, score - 1); // Decrement score by 1 for incorrect answer (minimum score is 0)
 				generateProblem();
 				clearInterval(timer); // Clear the timer
 				timeLeft = duration; // Reset time to 10 seconds

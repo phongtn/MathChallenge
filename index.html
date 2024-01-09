@@ -30,6 +30,7 @@
 			display.textContent = timeLeft;
 			document.getElementById('score').textContent = `Score: ${score}`; // Display score
 			if (--timeLeft < 0) {
+				updateScore(false);
 				generateProblem();
 				clearInterval(timer); // Clear the timer
 				timeLeft = duration; // Reset time to 10 seconds
@@ -68,10 +69,16 @@
 
 		// Check if user selected the correct answer
 		if (selectedNumber === correctAnswer) {
+			document.getElementById('correctSound').play();
 			score += 1; // Increment score by 1 for correct answer
 			generateProblem();
-			document.getElementById('correctSound').play();
 		} else {
+			updateScore(false); // Update
+		}
+	}
+
+	function updateScore(isCorrectAnswer) { 
+		if (isCorrectAnswer == false) {
 			score = Math.max(0, score - 1); // Decrement score by 1 for incorrect answer (minimum score is 0)
 			document.getElementById('wrongSound').play();
 		}

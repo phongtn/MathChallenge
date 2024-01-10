@@ -1,13 +1,13 @@
-## disclaimer
+## Disclaimer
 This game is built with the support of ChatGPT which ChatGPT is the main worker.
 My responsibility is prompting to ChatGPT. ChatGPT responds to coding and research questions.
-Initially, chatgpt also had designed the layout for the game but it's terrible. So, I decided to update the layout for the game. 
+Initially, ChatGPT also had designed the layout for the game but it's terrible. So, I decided to update the layout for the game. 
 
 All of the documentation below is also written by ChatGPT.
 Huge thanks to the [OpenAI](https://openai.com/) the author of ChatGPT.
 
 ## Introduction
-This application is designed to provide an interactive and educational experience for users by presenting multiplication problems and allowing them to test their skills. The application features a countdown clock, a score tracker, and a series of multiplication problems with multiple choice answers.
+This application is designed to provide an interactive and educational experience for users by presenting multiplication problems and allowing them to test their skills. The application features a countdown clock, a score tracker, and a series of multiplication problems with multiple-choice answers.
 
 ## Features
 
@@ -19,7 +19,7 @@ At the top of the screen, you will see a countdown clock that starts from 10 sec
 
 ### Score Tracker
 
-Next to the countdown clock, there is a label component that displays the user's score. The score increases by 1 points for each correct answer and decreases by 1 point for each incorrect answer.
+Next to the countdown clock, there is a label component that displays the user's score. The score increases by 1 point for each correct answer and decreases by 1 point for each incorrect answer.
 
 ### Multiplication Problems
 

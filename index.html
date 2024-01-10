@@ -14,14 +14,13 @@
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YX4R5K8CT3"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+	window.dataLayer = window.dataLayer || [];
+	function gtag() { dataLayer.push(arguments); }
+	gtag('js', new Date());
 
-  gtag('config', 'G-YX4R5K8CT3');
+	gtag('config', 'G-YX4R5K8CT3');
 </script>
 <script>
-	// Inline JavaScript for functionality
 	let timer;
 	let correctAnswer;
 	let score = 0;
@@ -44,12 +43,32 @@
 	}
 
 	function generateProblem() {
-		// Generate a new multiplication problem with two digits
-		const num1 = Math.floor(Math.random() * 10) + 1;
-		const num2 = Math.floor(Math.random() * 10) + 1;
-		correctAnswer = num1 * num2;
-		document.getElementById('problem').textContent = `${num1} x ${num2} = ?`;
-		// Generate two options, one of which is the correct answer
+		// Randomly select between multiplication and division
+		const operation = Math.random() < 0.5 ? 'multiplication' : 'division'; 
+		let num1, num2, options;
+
+		if (operation === 'multiplication') {
+			num1 = Math.floor(Math.random() * 10) + 1;
+			num2 = Math.floor(Math.random() * 10) + 1;
+			correctAnswer = num1 * num2;
+			options = generateOptions(correctAnswer);
+			document.getElementById('problem').textContent = `${num1} x ${num2} = ?`;
+		} else { // Division operation
+			correctAnswer = Math.floor(Math.random() * 10) + 1;
+			num2 = Math.floor(Math.random() * 10) + 1;
+			num1 = correctAnswer * num2;
+			options = generateOptions(correctAnswer);
+			document.getElementById('problem').textContent = `${num1} / ${num2} = ?`;
+		}
+
+		// Display options on buttons in random order
+		displayOptions(options);
+		// reset timer
+		const display = document.getElementById('countdown');
+		startTimer(display);
+	}
+
+	function generateOptions(correctAnswer) {
 		const option1 = correctAnswer;
 		let option2 = option1;
 		while (option2 === option1) {
@@ -57,15 +76,19 @@
 		}
 		const options = [option1, option2];
 		options.sort(() => Math.random() - 0.5);
-		document.getElementsByTagName('button')[0].textContent = options[0];
-		document.getElementsByTagName('button')[1].textContent = options[1];
+		return options;
+	}
 
-		// reset timer
-		const display = document.getElementById('countdown');
-		startTimer(display);
+	function displayOptions(options) {
+		const buttons = document.getElementsByTagName('button');
+		for (let i = 0; i < options.length; i++) {
+			buttons[i].textContent = options[i];
+		}
 	}
 
 	function checkAnswer(choice) {
+		console.log(choice);
+		console.log(correctAnswer);
 		// Get the text content of the button clicked
 		const selectedOption = document.getElementsByTagName('button')[choice - 1].textContent;
 		// Convert the text content to a number for comparison
@@ -81,7 +104,7 @@
 		}
 	}
 
-	function updateScore(isCorrectAnswer) { 
+	function updateScore(isCorrectAnswer) {
 		if (isCorrectAnswer == false) {
 			score = Math.max(0, score - 1); // Decrement score by 1 for incorrect answer (minimum score is 0)
 			document.getElementById('wrongSound').play();
@@ -121,11 +144,11 @@
 			<div id="options" class="flex justify-center">
 				<button onclick="checkAnswer(1)"
 					class="mx-auto mt-10 block rounded-xl border-4 border-transparent bg-orange-400 px-6 py-3 mb-4 mr-4 rounded-lg text-xl font-medium text-orange-100 outline-8 hover:outline hover:duration-300">Track
-					Order</button>
+					Answer 1</button>
 
 				<button onclick="checkAnswer(2)"
 					class="mx-auto mt-10 block rounded-xl border-4 border-transparent bg-orange-400 px-6 py-3 mb-4 mr-4 rounded-lg text-xl font-medium text-orange-100 outline-8 hover:outline hover:duration-300">Track
-					Order</button>
+					Answer 2</button>
 			</div>
 		</div>
 	</div>

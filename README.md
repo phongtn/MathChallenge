@@ -1,9 +1,9 @@
 ## Disclaimer
 This game is built with the support of ChatGPT which ChatGPT is the main worker.
-My responsibility is prompting to ChatGPT. ChatGPT responds to coding and research questions.
+My responsibility is prompting to ChatGPT. ChatGPT responds to coding and research questions. 
 Initially, ChatGPT also had designed the layout for the game but it's terrible. So, I decided to update the layout for the game. 
 
-All of the documentation below is also written by ChatGPT.
+All of the documentation below is also written by ChatGPT. 
 Huge thanks to the [OpenAI](https://openai.com/) the author of ChatGPT.
 
 ## Introduction

@@ -2,154 +2,165 @@
 <html lang="en">
 
 <head>
-	<title>Math challenge for kids</title>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Simple math game for Kids to learn multiplication table">
-	<meta name="keywords" content="Math game, math challenge">
-	<meta name="author" content="PhongTn">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="src/output.css" rel="stylesheet">
+    <title>Math challenge for kids</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Simple math game for Kids to learn multiplication table">
+    <meta name="keywords" content="Math game, math challenge">
+    <meta name="author" content="PhongTn">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="src/output.css" rel="stylesheet">
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YX4R5K8CT3"></script>
 <script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag() { dataLayer.push(arguments); }
-	gtag('js', new Date());
-	gtag('config', 'G-YX4R5K8CT3');
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'G-YX4R5K8CT3');
 </script>
 <script>
-	let timer;
-	let correctAnswer;
-	let score = 0;
-	let duration = 5;
+    let timer;
+    let correctAnswer;
+    let score = 0;
+    let duration = 5;
 
-	function startTimer(display) {
-		clearInterval(timer); // Clear any existing timers
-		let timeLeft = duration;
-		timer = setInterval(function () {
-			display.textContent = timeLeft;
-			document.getElementById('score').textContent = `Score: ${score}`; // Display score
-			if (--timeLeft < 0) {
-				score = Math.max(0, score - 1); // Decrement score by 1 for incorrect answer (minimum score is 0)
-				generateProblem();
-				clearInterval(timer); // Clear the timer
-				timeLeft = duration; // Reset time to 10 seconds
-				startTimer(display); // Restart timer
-			}
-		}, 1000);
-	}
+    function startTimer(display) {
+        clearInterval(timer); // Clear any existing timers
+        let timeLeft = duration;
+        timer = setInterval(function () {
+            display.textContent = timeLeft;
+            document.getElementById('score').textContent = `Score: ${score}`; // Display score
+            if (--timeLeft < 0) {
+                score = Math.max(0, score - 1); // Decrement score by 1 for incorrect answer (minimum score is 0)
+                generateProblem();
+                clearInterval(timer); // Clear the timer
+                timeLeft = duration; // Reset time to 10 seconds
+                startTimer(display); // Restart timer
+            }
+        }, 1000);
+    }
 
-	function generateProblem() {
-		// Randomly select between multiplication and division
-		const operation = Math.random() < 0.5 ? 'multiplication' : 'division'; 
-		let num1, num2, options;
+    function generateProblem() {
+        // Randomly select between multiplication and division
+        const operation = Math.random() < 0.5 ? 'multiplication' : 'division';
+        let num1, num2, options;
 
-		if (operation === 'multiplication') {
-			num1 = Math.floor(Math.random() * 10) + 1;
-			num2 = Math.floor(Math.random() * 10) + 1;
-			correctAnswer = num1 * num2;
-			options = generateOptions(correctAnswer);
-			document.getElementById('problem').textContent = `${num1} x ${num2} = ?`;
-		} else { // Division operation
-			correctAnswer = Math.floor(Math.random() * 10) + 1;
-			num2 = Math.floor(Math.random() * 10) + 1;
-			num1 = correctAnswer * num2;
-			options = generateOptions(correctAnswer);
-			document.getElementById('problem').textContent = `${num1} / ${num2} = ?`;
-		}
+        if (operation === 'multiplication') {
+            num1 = Math.floor(Math.random() * 10) + 1;
+            num2 = Math.floor(Math.random() * 10) + 1;
+            correctAnswer = num1 * num2;
+            options = generateOptions(correctAnswer);
+            document.getElementById('problem').textContent = `${num1} x ${num2} = ?`;
+        } else { // Division operation
+            correctAnswer = Math.floor(Math.random() * 10) + 1;
+            num2 = Math.floor(Math.random() * 10) + 1;
+            num1 = correctAnswer * num2;
+            options = generateOptions(correctAnswer, true);
+            document.getElementById('problem').textContent = `${num1} / ${num2} = ?`;
+        }
 
-		// Display options on buttons in random order
-		displayOptions(options);
-		// reset timer
-		const display = document.getElementById('countdown');
-		startTimer(display);
-	}
+        // Display options on buttons in random order
+        displayOptions(options);
+        // reset timer
+        const display = document.getElementById('countdown');
+        startTimer(display);
+    }
 
-	function generateOptions(correctAnswer) {
-		const option1 = correctAnswer;
-		let option2 = option1;
-		while (option2 === option1) {
-			option2 = Math.floor(Math.random() * 100) + 1;
-		}
-		const options = [option1, option2];
-		options.sort(() => Math.random() - 0.5);
-		return options;
-	}
+    function generateOptions(correctAnswer, isDivision) {
+        const option1 = correctAnswer;
+        let option2 = option1;
+        while (option2 === option1) {
+            if (isDivision) {
+            	option2 = Math.floor(Math.random() * 10) + 1;
+            } else
+                option2 = Math.floor(Math.random() * 100) + 1;
+        }
+        const options = [option1, option2];
+        options.sort(() => Math.random() - 0.5);
+        return options;
+    }
 
-	function displayOptions(options) {
-		const buttons = document.getElementsByTagName('button');
-		for (let i = 0; i < options.length; i++) {
-			buttons[i].textContent = options[i];
-		}
-	}
+    function displayOptions(options) {
+        const buttons = document.getElementsByTagName('button');
+        for (let i = 0; i < options.length; i++) {
+            buttons[i].textContent = options[i];
+        }
+    }
 
-	function checkAnswer(choice) {
-		// Get the text content of the button clicked
-		const selectedOption = document.getElementsByTagName('button')[choice - 1].textContent;
-		// Convert the text content to a number for comparison
-		const selectedNumber = parseInt(selectedOption);
+    function checkAnswer(choice) {
+        // Get the text content of the button clicked
+        const selectedOption = document.getElementsByTagName('button')[choice - 1].textContent;
+        // Convert the text content to a number for comparison
+        const selectedNumber = parseInt(selectedOption);
 
-		// Check if user selected the correct answer
-		if (selectedNumber === correctAnswer) {
-			document.getElementById('correctSound').play();
-			score += 1; // Increment score by 1 for correct answer
-			generateProblem();
-		} else {
-			updateScore(false); // Update
-		}
-	}
+        // Check if user selected the correct answer
+        if (selectedNumber === correctAnswer) {
+            document.getElementById('correctSound').play();
+            score += 1; // Increment score by 1 for correct answer
+            generateProblem();
+        } else {
+            updateScore(false); // Update
+        }
+    }
 
-	function updateScore(isCorrectAnswer) {
-		if (isCorrectAnswer == false) {
-			score = Math.max(0, score - 1); // Decrement score by 1 for incorrect answer (minimum score is 0)
-			document.getElementById('wrongSound').play();
-		}
-	}
+    function updateScore(isCorrectAnswer) {
+        if (isCorrectAnswer == false) {
+            score = Math.max(0, score - 1); // Decrement score by 1 for incorrect answer (minimum score is 0)
+            document.getElementById('wrongSound').play();
+        }
+    }
 
-	// Initial timer start
-	window.onload = function () {
-		const tenSeconds = 10;
-		const display = document.getElementById('countdown');
-		startTimer(display);
-		generateProblem();
-	};
+    // Initial timer start
+    window.onload = function () {
+        const tenSeconds = 10;
+        const display = document.getElementById('countdown');
+        startTimer(display);
+        generateProblem();
+    };
 </script>
 
 <body class="h-screen overflow-hidden flex items-center justify-center" style="background: #edf2f7;">
 
-	<audio id="correctSound" src="correct.mp3" preload="auto"></audio>
-	<audio id="wrongSound" src="wrong.mp3" preload="auto"></audio>
+<audio id="correctSound" src="correct.mp3" preload="auto"></audio>
+<audio id="wrongSound" src="wrong.mp3" preload="auto"></audio>
 
-	<div class="flex min-h-screen items-center justify-center bg-gray-100">
-		<div class="rounded-lg bg-gray-50 px-16 py-14">
-			<div class="text-center mb-8">
+<div class="flex min-h-screen items-center justify-center bg-gray-100">
+    <div class="rounded-lg bg-gray-50 px-16 py-14">
+        <div class="text-center mb-8">
 
-				<div id="countdown" class="text-4xl font-bold rounded-full bg-green-200 p-6">
-				</div>
+            <div id="countdown" class="text-4xl font-bold rounded-full bg-green-200 p-6">
+            </div>
 
-				<div id="score" class="my-4 text-center text-3xl font-semibold text-gray-700">
-					Score: 0
-				</div>
-			</div>
+            <div id="score" class="my-4 text-center text-3xl font-semibold text-gray-700">
+                Score: 0
+            </div>
+        </div>
 
-			<div id="problem" class="text-center text-4xl font-bold text-blue-600 mb-8">
-				<!-- Multiplication problem will be displayed here -->
-			</div>
+        <div id="problem" class="text-center text-4xl font-bold text-blue-600 mb-8">
+            <!-- Multiplication problem will be displayed here -->
+        </div>
 
-			<div id="options" class="flex justify-center">
-				<button onclick="checkAnswer(1)"
-					class="mx-auto mt-10 block rounded-xl border-4 border-transparent bg-orange-400 px-6 py-3 mb-4 mr-4 rounded-lg text-xl font-medium text-orange-100 outline-8 hover:outline hover:duration-300">Track
-					Answer 1</button>
+        <div id="options" class="flex justify-center">
+            <button onclick="checkAnswer(1)"
+                    class="mx-auto mt-10 block rounded-xl border-4 border-transparent bg-orange-400 px-6 py-3 mb-4 mr-4 rounded-lg text-xl font-medium text-orange-100 outline-8 hover:outline hover:duration-300">
+                Track
+                Answer 1
+            </button>
 
-				<button onclick="checkAnswer(2)"
-					class="mx-auto mt-10 block rounded-xl border-4 border-transparent bg-orange-400 px-6 py-3 mb-4 mr-4 rounded-lg text-xl font-medium text-orange-100 outline-8 hover:outline hover:duration-300">Track
-					Answer 2</button>
-			</div>
-		</div>
-	</div>
+            <button onclick="checkAnswer(2)"
+                    class="mx-auto mt-10 block rounded-xl border-4 border-transparent bg-orange-400 px-6 py-3 mb-4 mr-4 rounded-lg text-xl font-medium text-orange-100 outline-8 hover:outline hover:duration-300">
+                Track
+                Answer 2
+            </button>
+        </div>
+    </div>
+</div>
 </body>
 
 </html>

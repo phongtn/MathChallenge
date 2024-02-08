@@ -1,9 +1,12 @@
+*This project is archived. Initially, this project was built with basic JavaScript and HTML. Then I wanted to add more features, So I decided to move on to use [Next.js](https://nextjs.org/)*  
+*The new project at here: [https://github.com/phongtn/simple-match-challenge](https://github.com/phongtn/simple-match-challenge).*
+
 ## Disclaimer
 This game is built with the support of ChatGPT which ChatGPT is the main worker.  
 My responsibility is prompting to ChatGPT. ChatGPT responds to coding and research questions.  
 Initially, ChatGPT also had designed the layout for the game but it's terrible. So, I decided to update the layout for the game. 
 
-All of the documentation below is also written by ChatGPT.  
+ChatGPT also writes all of the documentation below.  
 Huge thanks to the [OpenAI](https://openai.com/) the author of ChatGPT.
 
 ## Introduction
@@ -31,7 +34,7 @@ Below the multiplication problem, there are two buttons representing the possibl
 
 ### Dynamic Problem Generation
 
-After selecting an answer, the web application will generate a new multiplication problem automatically. This allows users to continuously practice their multiplication skills.
+After selecting an answer, the web application will generate a new multiplication problem automatically. This allows users to practice their multiplication skills continuously.
 
 ### Score Update
 
